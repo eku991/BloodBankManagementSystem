@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Blood Bank{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Dashboard</h1>
+    <p>Overview of blood inventory using Hash Map indexing</p>
+</div>
+
+<div class="dsa-info">
+    <strong>DSA Concept - Hash Map:</strong> Blood units are indexed by blood group using a custom Hash Map.
+    Each blood group (key) maps to its list of units (value), enabling O(1) average-time lookups.
+</div>
+
+<div class="stats-row">
+    <div class="stat-card">
+        <div class="stat-value">{{ total }}</div>
+        <div class="stat-label">Total Units Available</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{{ expired_count }}</div>
+        <div class="stat-label">Expired Units (Need Removal)</div>
+    </div>
+</div>
+
+<h2 style="margin-bottom: 15px; color: #2c3e50;">Blood Group Inventory</h2>
+<div class="dashboard-grid">
+    {% for group, count in inventory.items() %}
+    <div class="blood-card">
+        <div class="group">{{ group }}</div>
+        <div class="count">{{ count }}</div>
+        <div class="label">units</div>
+    </div>
+    {% endfor %}
+</div>
+
+{% if recent_transfusions %}
+<div class="card">
+    <h2>Recent Transfusions</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Patient</th>
+                <th>Blood Group</th>
+                <th>Units</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in recent_transfusions %}
+            <tr>
+                <td>{{ t.patient_name }}</td>
+                <td><span class="badge badge-danger">{{ t.blood_group }}</span></td>
+                <td>{{ t.units_used }}</td>
+                <td>{{ t.transfusion_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endblock %}

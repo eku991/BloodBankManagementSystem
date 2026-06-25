@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Request Blood - Blood Bank{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Request Blood</h1>
+    <p>Request blood units for a patient</p>
+</div>
+
+<div class="dsa-info">
+    <strong>DSA Concept - Queue (FIFO):</strong> Blood is dispensed in First-In-First-Out order.
+    The oldest available unit for the requested blood group is used first to prevent expiry.
+</div>
+
+<div class="card">
+    <h2>Available Stock</h2>
+    <div class="dashboard-grid">
+        {% for group, count in group_counts.items() %}
+        <div class="blood-card">
+            <div class="group">{{ group }}</div>
+            <div class="count">{{ count }}</div>
+            <div class="label">units</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="card">
+    <h2>Request Form</h2>
+    <form method="POST">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Patient Name</label>
+                <input type="text" name="patient_name" required placeholder="Enter patient's name">
+            </div>
+            <div class="form-group">
+                <label>Blood Group Needed</label>
+                <select name="blood_group" required>
+                    <option value="">Select blood group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Units Needed</label>
+            <input type="number" name="units" min="1" max="10" value="1" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Request Blood</button>
+    </form>
+</div>
+{% endblock %}
