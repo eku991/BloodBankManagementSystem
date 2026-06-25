@@ -1,1 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Transfusion History - Blood Bank{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Transfusion History</h1>
+    <p>Log of all blood transfusions</p>
+</div>
+
+<div class="card">
+    {% if logs %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Patient</th>
+                <th>Blood Group</th>
+                <th>Units Used</th>
+                <th>Blood Unit ID</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td>#{{ log.id }}</td>
+                <td>{{ log.patient_name }}</td>
+                <td><span class="badge badge-danger">{{ log.blood_group }}</span></td>
+                <td>{{ log.units_used }}</td>
+                <td>#{{ log.blood_unit_id }}</td>
+                <td>{{ log.transfusion_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="color: #95a5a6; text-align: center; padding: 30px;">No transfusion records yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
 
