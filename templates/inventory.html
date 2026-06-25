@@ -1,1 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Inventory - Blood Bank{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Blood Inventory</h1>
+    <p>View all available blood units</p>
+</div>
+
+<div class="dsa-info">
+    <strong>DSA Concept - Merge Sort:</strong> Blood units are sorted by expiry date using Merge Sort (O(n log n)).
+    Units expiring soonest appear first so staff can prioritize their use or removal.
+</div>
+
+<div class="card">
+    <div class="sort-links">
+        <strong>Sort by:</strong>
+        <a href="{{ url_for('inventory', sort='expiry') }}" class="{{ 'active' if sort_by == 'expiry' }}">Expiry Date (Merge Sort)</a>
+        <a href="{{ url_for('inventory', sort='group') }}" class="{{ 'active' if sort_by == 'group' }}">Blood Group</a>
+    </div>
+
+    {% if blood_units %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Donor</th>
+                <th>Blood Group</th>
+                <th>Donation Date</th>
+                <th>Expiry Date</th>
+                <th>Days Left</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for unit in blood_units %}
+            <tr>
+                <td>#{{ unit.id }}</td>
+                <td>{{ unit.donor_name }}</td>
+                <td><span class="badge badge-danger">{{ unit.blood_group }}</span></td>
+                <td>{{ unit.donation_date }}</td>
+                <td>{{ unit.expiry_date }}</td>
+                <td>
+                    {% if unit.is_expired %}
+                        <span class="badge badge-danger">Expired</span>
+                    {% elif unit.days_left <= 7 %}
+                        <span class="badge badge-warning">{{ unit.days_left }} days</span>
+                    {% else %}
+                        <span class="badge badge-success">{{ unit.days_left }} days</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if unit.is_expired %}
+                        <span class="badge badge-danger">Expired</span>
+                    {% else %}
+                        <span class="badge badge-success">Available</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="color: #95a5a6; text-align: center; padding: 30px;">No blood units in inventory.</p>
+    {% endif %}
+</div>
+{% endblock %}
 
