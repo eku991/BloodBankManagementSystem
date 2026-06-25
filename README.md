@@ -1,4 +1,4 @@
-Blood Bank Management System
+# Blood Bank Management System
 Overview
 
 The Blood Bank Management System is a web-based application developed using Python, Flask, SQLite, HTML, and CSS. It helps manage blood donations, blood requests, inventory tracking, emergency blood matching, and transfusion history.
@@ -19,40 +19,40 @@ Features
 
 ---
 
-Technologies Used
+# Technologies Used
 
-Backend
+# Backend
 
 - Python
 - Flask
 - SQLite
 
-Frontend
+# Frontend
 
 - HTML
 - CSS
 
-Database
+# Database
 
 - SQLite Database (bloodbank.db)
 
 ---
 
-DSA Concepts Used
+# DSA Concepts Used
 
-Hash Map
+#Hash Map
 
 Used for fast blood-group indexing and inventory lookup.
 
 Time Complexity: O(1) Average Lookup
 
-Queue
+#Queue
 
 Used to allocate the oldest blood units first (FIFO principle).
 
 Time Complexity: O(1)
 
-Merge Sort
+#Merge Sort
 
 Used to sort blood units according to expiry dates.
 
@@ -60,9 +60,9 @@ Time Complexity: O(n log n)
 
 ---
 
-System Modules
+# System Modules
 
-Dashboard
+#Dashboard
 
 Displays:
 
@@ -71,29 +71,29 @@ Displays:
 - Blood Group Inventory
 - Recent Transfusions
 
-Donate Blood
+#Donate Blood
 
 Allows donors to register blood donations and automatically calculates expiry dates.
 
-Request Blood
+#Request Blood
 
 Processes patient requests and allocates compatible blood units.
 
-Inventory
+#Inventory
 
 Shows available blood units and expiry information.
 
-Emergency Match
+#Emergency Match
 
 Finds compatible blood groups during emergencies.
 
-History
+#History
 
 Maintains a record of all blood transfusions.
 
 ---
 
-Future Improvements
+# Future Improvements
 
 - User Authentication and Authorization
 - SMS and Email Notifications
@@ -105,7 +105,7 @@ Future Improvements
 
 ---
 
-How to Run the Project
+# How to Run the Project
 
 1. Clone the repository.
 2. Install required packages:
@@ -122,7 +122,7 @@ http://127.0.0.1:5000
 
 ---
 
-Authors
+# Authors
 
 Developed as a Data Structures and Algorithms (DSA) Project.
 
