@@ -1,1 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Emergency Match - Blood Bank{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Emergency Blood Matching</h1>
+    <p>Find compatible blood groups for emergency transfusions</p>
+</div>
+
+<div class="dsa-info">
+    <strong>DSA Concepts Used:</strong> Hash Map for instant blood group lookup +
+    Merge Sort to show units expiring soonest (use those first).
+</div>
+
+<div class="card">
+    <h2>Search Compatible Blood</h2>
+    <form method="POST">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Patient's Blood Group</label>
+                <select name="blood_group" required>
+                    <option value="">Select blood group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+            </div>
+            <div class="form-group" style="display: flex; align-items: flex-end;">
+                <button type="submit" class="btn btn-primary">Find Compatible Blood</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% if results is not none %}
+<div class="card">
+    <h2>Compatible Blood Groups for {{ searched_group }}</h2>
+
+    {% for match in results %}
+    <div class="match-card {{ 'exact' if match.is_exact }}">
+        <div class="match-header">
+            <span class="match-group">
+                {{ match.blood_group }}
+                {% if match.is_exact %}
+                    <span class="badge badge-success">Exact Match</span>
+                {% else %}
+                    <span class="badge badge-warning">Compatible</span>
+                {% endif %}
+            </span>
+            <span>
+                <strong>{{ match.count }}</strong> unit(s) available
+            </span>
+        </div>
+
+        {% if match.units %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Donor</th>
+                    <th>Expiry Date</th>
+                    <th>Donation Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for unit in match.units %}
+                <tr>
+                    <td>{{ unit.donor_name }}</td>
+                    <td>{{ unit.expiry_date }}</td>
+                    <td>{{ unit.donation_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
 
