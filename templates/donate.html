@@ -1,1 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Donate Blood - Blood Bank{% endblock %}
 
+{% block content %}
+<div class="page-header">
+    <h1>Donate Blood</h1>
+    <p>Register a new blood donation</p>
+</div>
+
+<div class="dsa-info">
+    <strong>DSA Concept - Queue (FIFO):</strong> New donations are added to the back of the queue.
+    When blood is requested, the oldest donation (front of queue) is used first, minimizing waste.
+</div>
+
+<div class="card">
+    <h2>Donation Form</h2>
+    <form method="POST">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Donor Name</label>
+                <input type="text" name="donor_name" required placeholder="Enter donor's full name">
+            </div>
+            <div class="form-group">
+                <label>Blood Group</label>
+                <select name="blood_group" required>
+                    <option value="">Select blood group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Number of Units</label>
+                <input type="number" name="units" min="1" max="5" value="1" required>
+            </div>
+            <div class="form-group">
+                <label>Donation Date</label>
+                <input type="date" name="donation_date" required>
+            </div>
+        </div>
+        <p style="color: #7f8c8d; font-size: 0.85em; margin-bottom: 15px;">
+            * Expiry date is automatically calculated as 42 days from donation date.
+        </p>
+        <button type="submit" class="btn btn-primary">Register Donation</button>
+    </form>
+</div>
+{% endblock %}
